@@ -33,7 +33,7 @@ public class Servidor {
         DataInputStream entrada = new DataInputStream(conexion.getInputStream());
 
         /* RECIBIR 10000 NUMEROS MEDIANTE readDouble */
-        /*for(double i=1; i<=10; i++){
+        /*for(double i=1; i<=10000; i++){
             double x = entrada.readDouble();
             System.out.println(x);
         }
@@ -43,9 +43,9 @@ public class Servidor {
 
         /* RECIBIR 10000 NUMEROS MEDIANTE readDouble */
        
-        for(double i=1; i<=10; i++){
-            byte [] a = new byte[10*8];
-            read(entrada, a, 0,10*8);
+        for(double i=1; i<=10000; i++){
+            byte [] a = new byte[10000*8];
+            read(entrada, a, 0,10000*8);
             ByteBuffer b = ByteBuffer.wrap(a);
             System.out.println(b.getDouble());
         }

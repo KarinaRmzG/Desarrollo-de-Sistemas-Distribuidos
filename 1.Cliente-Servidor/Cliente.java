@@ -35,14 +35,14 @@ public class Cliente {
                 DataInputStream entrada = new DataInputStream(conexion.getInputStream());
 
                 /* ENVIAR 10000 NUMEROS MEDIANTE writeDouble */
-                /*for(double i=1; i<=10; i++){
+                /*for(double i=1; i<=10000; i++){
                     salida.writeDouble(i);
                 }
                 System.out.println("Milisegundos que tarda en ENVIAR 10000 numeros:"+ms);*/
 
                 /* ENVIAR 10000 NUMEROS MEDIANTE ByteBuffer */
-                for(double i=1; i<=10; i++){
-                    ByteBuffer b = ByteBuffer.allocate(10*8);
+                for(double i=1; i<=10000; i++){
+                    ByteBuffer b = ByteBuffer.allocate(10000*8);
                     b.putDouble(i);
                     byte[] a = b.array();
                     salida.write(a);
