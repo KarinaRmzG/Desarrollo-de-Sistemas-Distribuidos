@@ -29,12 +29,12 @@ public class ClienteMulticast2 {
 
         MulticastSocket socket = new MulticastSocket(50000);//socket al pto 50000
         InetSocketAddress grupo = new InetSocketAddress(InetAddress.getByName("230.0.0.0"),50000);//grupo y puerto al que se va a transmitir (50000)
-        NetworkInterface netInter = NetworkInterface.getByName("em1");//listado de targetas de red
+        NetworkInterface netInter = NetworkInterface.getByName("eth7");//listado de targetas de red
         socket.joinGroup(grupo,netInter);
         System.out.println("Servicio iniciado y unido al grupo.. comienza escucha de mensajes");
         
     /*Entonces el cliente puede recibir los mensajes enviados al grupo por el servidor.
-    Primeramente vamos a recibir una cadena de caracteres.*/
+    Se recibirá una cadena de caracteres.*/
         byte[] a = recibe_mensaje(socket, 4);
         System.out.println(new String(a, "UTF-8"));
         

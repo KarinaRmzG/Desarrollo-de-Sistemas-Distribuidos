@@ -20,7 +20,7 @@ public class ServidorMulticast {
         
         //creamos un DatagramPacket para crear un paquete con el mensaje
         DatagramPacket paquete = new DatagramPacket(buffer, buffer.length, grupo, puerto);
-        
+        System.out.println("Datagrama multicast recibido desde "+paquete.getAddress()+":"+paquete.getPort());
         socket.send(paquete);   //envio del paquete
         socket.close();     //cierra socket
     }
@@ -33,7 +33,7 @@ public class ServidorMulticast {
         System.setProperty("java.net.preferIPv4Stack", "true");
         
     //enviamos la cadena de caracteres hola, se envia al grupo identificado por la IP 230.0.0.0:
-        envia_mensaje("hola".getBytes(), "230.0.0.0", 50000);
+        envia_mensaje("holi".getBytes(), "230.0.0.0", 50000);
         
     /*se enviaran cinco numeros punto flotante de 64 bits. Primero empacaremos los números utilizando 
       un objeto ByteBuffer. Cinco numeros punto flotante de 64 bits ocupan 5 x 8 bytes (64 bits = 8 bytes). 
