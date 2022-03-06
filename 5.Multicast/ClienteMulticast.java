@@ -21,7 +21,7 @@ public class ClienteMulticast {
     }
     
     public static void main(String[] args) throws UnknownHostException, IOException {
-        System.setProperty("java.net,preferIPv4Stack", "true");
+        System.setProperty("java.net.preferIPv4Stack", "true");
         
     
         InetAddress grupo = InetAddress.getByName("230.0.0.0");//grupo multicast IPv4
