@@ -128,9 +128,7 @@ public class DistributedMatrixMultiplication {
      * @throws InterruptedException
      */
 	public static void initClient(double[][] a, double[][] b) throws InterruptedException {
-		ip_Nodo_1 = "40.114.71.69";
-        ip_Nodo_2 = "104.45.192.253";
-        ip_Nodo_3 = "40.80.147.16";
+		
 		//Slicing the matrices
 		double[][] a1 = new double[N/2][];
 		double[][] a2 = new double[N/2][];
