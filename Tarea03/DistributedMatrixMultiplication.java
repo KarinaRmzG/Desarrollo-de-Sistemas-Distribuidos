@@ -5,6 +5,7 @@
  *                  - Vásquez Hérnandez Alan Mauricio
  * Languaje:        Java
  * Description:     Compute the product of two square matrices in distributed form over four nodes
+ * Way to run it:	java DistributedMatrixMultiplication <node> <N> <ip>
  */
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -46,8 +47,8 @@ public class DistributedMatrixMultiplication {
 				e.printStackTrace();
 			}
         else
-            //initServer(node, 50000 + node);
-			initServer(node, 50000);
+            initServer(node, 50000 + node); //local
+			//initServer(node, 50000); //virtual machine
     }
     
     /**
@@ -184,8 +185,8 @@ public class DistributedMatrixMultiplication {
      * @param port      connection port
      */
 	public static void initServer(int node, int port) {
-        //System.out.printf(" Server Node %d\n por el puerto %d",node,50000+node);
-		System.out.printf(" Server Node %d\n port %d",node,50000);
+        System.out.printf(" Server Node %d\n port: %d",node,50000+node);//local
+		//System.out.printf(" Server Node %d\n port %d",node,50000);// virtual machine
 		try(ServerSocket server = new ServerSocket(port);
 			Socket connection = server.accept();
 
