@@ -23,14 +23,20 @@ import java.util.concurrent.Future;
 public class DistributedMatrixMultiplication {
 	static String ip;
     private static int N;                       //Matrix dimension 
-	static String ip_Nodo_1;    //ip del nodo servidor 1    (Cliente)
-    static String ip_Nodo_2;    //ip del nodo servidor 2    (Cliente)
-    static String ip_Nodo_3;    //ip del nodo servidor 3    (Cliente)
+	static String ipNodo_1;    //ip del nodo servidor 1    (Cliente)
+    static String ipNodo_2;    //ip del nodo servidor 2    (Cliente)
+    static String ipNodo_3;    //ip del nodo servidor 3    (Cliente)
 	
     public static void main(String[] args) throws InterruptedException{
+		//ipNodo_1 = "127.0.0.1";
+        //ipNodo_2 = "127.0.0.1";
+        //ipNodo_3 = "127.0.0.1";
+		ipNodo_1 = "137.117.105.229";
+        ipNodo_2 = "137.117.105.229";
+        ipNodo_3 = "137.117.105.229";
         int node = Integer.valueOf(args[0]);    //Variable to know the number of the node
         N = Integer.valueOf(args[1]); 
-		ip = args[1];          
+		//ip = args[1];          
         //Matrix initialization
 		double[][] a = new double[N][N];
 		double[][] b = new double[N][N];
@@ -47,8 +53,8 @@ public class DistributedMatrixMultiplication {
 				e.printStackTrace();
 			}
         else
-            initServer(node, 50000 + node); //local
-			//initServer(node, 50000); //virtual machine
+            initServer(node, 50000 + node,ip); //local
+			//initServer(node, 50000,ip); //virtual machine
     }
     
     /**
@@ -129,7 +135,6 @@ public class DistributedMatrixMultiplication {
      * @throws InterruptedException
      */
 	public static void initClient(double[][] a, double[][] b) throws InterruptedException {
-		
 		//Slicing the matrices
 		double[][] a1 = new double[N/2][];
 		double[][] a2 = new double[N/2][];
@@ -184,9 +189,13 @@ public class DistributedMatrixMultiplication {
      * @param node      connection node
      * @param port      connection port
      */
-	public static void initServer(int node, int port) {
+	public static void initServer(int node, int port, String ip) {
+		if(node==1) ip = DistributedMatrixMultiplication.ipNodo_1;
+		if(node==2) ip = DistributedMatrixMultiplication.ipNodo_2;
+		if(node==3) ip = DistributedMatrixMultiplication.ipNodo_3;
         System.out.printf(" Server Node %d\n port: %d",node,50000+node);//local
 		//System.out.printf(" Server Node %d\n port %d",node,50000);// virtual machine
+		System.out.println(" IP:  "+ip);//local
 		try(ServerSocket server = new ServerSocket(port);
 			Socket connection = server.accept();
 
@@ -218,9 +227,9 @@ public class DistributedMatrixMultiplication {
 			Socket socket = null;
 			while(true) { //Waits until the connection with the server is established
 				try {
-					//socket = new Socket(ip, 50000 + node);
+					socket = new Socket(ip, 50000 + node);//local
 					//socket = new Socket("localhost", 50000);
-					socket = new Socket(ip, 50000);
+					//socket = new Socket(ip, 50000);// VM
 					System.out.println("Connection to the node " + node
 							+ " accepted");
 					System.out.println("Connection to the port" + socket.getPort()
