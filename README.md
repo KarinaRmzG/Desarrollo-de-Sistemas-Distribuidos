@@ -3,7 +3,7 @@
 **Programa:** ESCOM ISC Plan 2009    
 **Grupo:** 4CV11  
 **Profesor:** Carlos Pineda Guerrero     
-**Alumnos:**  Ramírez Galindo Karina
+**Alumna:**  Ramírez Galindo Karina
 
 ## Lista de tareas
 |Nombre |
