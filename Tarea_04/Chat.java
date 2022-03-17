@@ -28,7 +28,6 @@ class Chat {
      * @throws IOException
      */
     static void envia_mensaje_multicast(byte[] buffer, String ip, int puerto) throws IOException {
-        //System.out.println("Ingrese el mensaje a enviar:");
         DatagramSocket socket = new DatagramSocket();
         socket.send(new DatagramPacket(buffer, buffer.length, InetAddress.getByName(ip), puerto));
         socket.close();
@@ -62,7 +61,8 @@ class Chat {
                     SocketAddress grupo = new InetSocketAddress(dir,PUERTO);//grupo y puerto al que se va a transmitir (50000)
                     socket.joinGroup(grupo, ni);//reporte de membresia IGMP --> uniendose a la direccion 230.0.0.0 por la NIC seleccionada
                     byte[] buffer = recibe_mensaje_multicast(socket, MAX_BITS_DATAGRAM);
-                    PrintStream salida = new PrintStream(System.out,true,"ISO-8859-1");
+                    PrintStream salida = new PrintStream(System.out, true, "Cp850");
+                    //PrintStream salida = new PrintStream(System.out,true,"ISO-8859-1");
                     salida.print(new String(buffer)+"\n");
                     socket.leaveGroup(grupo, ni);
                     socket.close();
@@ -81,15 +81,15 @@ class Chat {
         Worker w = new Worker();
         w.start();
         String nombre = args[0];
-        try (Scanner scanner = new Scanner(System. in)) {
-            System.out.println("Servicio iniciado.. comienza envio de anuncios");
+        try (Scanner scanner = new Scanner(System. in,"Cp850")) {
+            System.out.println(nombre + " te has unido al chat");
             // En un ciclo infinito se leerá cada mensaje del teclado y se enviará el
             // mensaje al grupo 230.0.0.0 a través del puerto 50000.
-            //System.out.println("Ingrese el mensaje a enviar:");
             while(true) {
                 System.out.println("Ingrese el mensaje a enviar:");
                 String mensaje = scanner. nextLine();
                 byte buffer[] = String.format("%s dice %s", nombre, mensaje).getBytes();
+                //System.out.println("Ingrese el mensaje a enviar:");
                 envia_mensaje_multicast(buffer, IP_MULTICAST,PUERTO);
             }
         }
