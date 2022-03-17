@@ -1,5 +1,5 @@
 # Desarrollo de Sistemas Distribuidos
-   
+
 **Grupo:** 4CV11
 **Profesor:** Pineda Guerrero Carlos
 **Alumna:** Ramírez Galindo Karina
