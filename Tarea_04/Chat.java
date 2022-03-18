@@ -47,6 +47,7 @@ class Chat {
         return paquete.getData();
     }
 
+    
     static class Worker extends Thread {
         public void run() {
             // En un ciclo infinito se recibirán los mensajes enviados al grupo
@@ -63,7 +64,8 @@ class Chat {
                     byte[] buffer = recibe_mensaje_multicast(socket, MAX_BITS_DATAGRAM);
                     PrintStream salida = new PrintStream(System.out, true, "Cp850");
                     //PrintStream salida = new PrintStream(System.out,true,"ISO-8859-1");
-                    salida.print(new String(buffer)+"\n");
+                    //salida.print(new String(buffer)+"\n");
+                    salida.print("\n"+new String(buffer).trim()+"\n");
                     socket.leaveGroup(grupo, ni);
                     socket.close();
                 } catch (IOException e){
@@ -85,11 +87,11 @@ class Chat {
             System.out.println(nombre + " te has unido al chat");
             // En un ciclo infinito se leerá cada mensaje del teclado y se enviará el
             // mensaje al grupo 230.0.0.0 a través del puerto 50000.
+            System.out.println("Ingrese el mensaje a enviar:");
             while(true) {
-                System.out.println("Ingrese el mensaje a enviar:");
+                //System.out.println("Ingrese el mensaje a enviar:");
                 String mensaje = scanner. nextLine();
                 byte buffer[] = String.format("%s dice %s", nombre, mensaje).getBytes();
-                //System.out.println("Ingrese el mensaje a enviar:");
                 envia_mensaje_multicast(buffer, IP_MULTICAST,PUERTO);
             }
         }
