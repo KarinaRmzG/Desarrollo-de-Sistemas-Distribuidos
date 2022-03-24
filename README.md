@@ -8,7 +8,7 @@
 ## Lista de Actividades
 |Nombre |Archivos|
 :--- |:---:|
-📓Actividad 1. Cliente - Servidor |
+📓Actividad 1. Cliente - Servidor | [📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/1.Cliente-Servidor)
 📓Actividad 2. Servidor Multithread  |
 📓Actividad 3. Sincronización Threads |
 📓Actividad 4. Cliente - Servidor SSL |
