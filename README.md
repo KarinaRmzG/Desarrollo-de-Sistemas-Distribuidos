@@ -6,8 +6,8 @@
 **Alumna:**  Ramírez Galindo Karina
 
 ## Lista de Actividades
-|Nombre |
-:--- |
+|Nombre |Archivos|
+:--- |:---:|
 📓Actividad 1. Cliente - Servidor |
 📓Actividad 2. Servidor Multithread  |
 📓Actividad 3. Sincronización Threads |
@@ -26,9 +26,9 @@
 📓Actividad 16. Matrices RMI |
 
 ## Lista de tareas
-|Nombre |
-:--- |
-💻Tarea 1. Cálculo de PI |
+|Nombre |Calificación|Archivos|
+:--- |:---:|:---:|
+💻Tarea 1. Cálculo de PI | 100/100 |
 💻Tarea 2. Implementación de un token-ring  |
 💻Tarea 3. Multiplicación distribuida de matrices utilizando paso de mensajes |
 💻Tarea 4. Chat Multicast |
