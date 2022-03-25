@@ -28,6 +28,7 @@ public class ServerRMI {
 	    try {
 	    	MatrixMultiplication obj = new MatrixMultiplication();
 			Naming.rebind(url + node,obj);
+
 			System.out.println("ServerRMI of node: " + node +  " ready");
 		} catch (RemoteException | MalformedURLException e) {
 			e.printStackTrace();

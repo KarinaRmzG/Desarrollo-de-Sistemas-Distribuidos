@@ -22,7 +22,7 @@ import java.util.concurrent.Future;
 
 public class ClientRMI {
 	private static int N;
-	private static String url = "rmi://localhost/test";
+	
 	private static float[][][] aSlices;
 	private static float[][][] bSlices;
 	private static float[][] c;
@@ -146,9 +146,31 @@ public class ClientRMI {
 	public static Runnable createTask(int node) { //creates the task that each thread will perform
 		return () -> {
 			try {
-				MatrixMultiplicationRemote connection = 
-						(MatrixMultiplicationRemote)Naming.lookup(url + node);
-					for(int i = 0; i < 4; i++)
+				MatrixMultiplicationRemote connection;
+				
+				float aux[][];
+
+				switch (node) {
+					case 1:
+						connection = 
+								(MatrixMultiplicationRemote)Naming.lookup("rmi://10.0.0.5/test" + node);
+						break;
+					case 2:
+						connection = 
+								(MatrixMultiplicationRemote)Naming.lookup("rmi://10.0.0.6/test" + node);
+						break;
+					case 3:
+						connection = 
+								(MatrixMultiplicationRemote)Naming.lookup("rmi://10.0.0.7/test" + node);
+						break;
+					case 4:
+						connection = 
+								(MatrixMultiplicationRemote)Naming.lookup("rmi://10.0.0.8/test" + node);
+						break;
+					default:
+						break;
+				}
+				for(int i = 0; i < 4; i++)
 						fillMatrix(((node - 1) * 4) + i, c, new MatrixMultiplication().multiply(aSlices[node - 1], bSlices[i]));
 			} catch (RemoteException | MalformedURLException| NotBoundException e) {
 				e.printStackTrace();
