@@ -147,9 +147,6 @@ public class ClientRMI {
 		return () -> {
 			try {
 				MatrixMultiplicationRemote connection;
-				
-				float aux[][];
-
 				switch (node) {
 					case 1:
 						connection = 
