@@ -32,4 +32,4 @@
 💻Tarea 2. Implementación de un token-ring  | 100/100 | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea02) |
 💻Tarea 3. Multiplicación distribuida de matrices utilizando paso de mensajes | 100/100 | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_03) |
 💻Tarea 4. Chat Multicast | 100/100 | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_04) |
-💻Tarea 5. Multiplicación de matrices utilizando objetos distribuidos | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_05) |
+💻Tarea 5. Multiplicación de matrices utilizando objetos distribuidos | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_05) |
