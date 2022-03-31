@@ -25,6 +25,7 @@
 📓Actividad 15. RMI | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/15.RMI) |
 📓Actividad 16. Matrices RMI | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/16.MatricesRMI) |
 📓Actividad 17. JSON | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/17.JSON) |
+📓Actividad 18. ServicioWeb SOAP | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/18.ServiciosWeb) |
 
 ## Lista de tareas
 |Nombre |Calificación|Archivos|
