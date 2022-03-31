@@ -1,6 +1,8 @@
 /**
  * Actividad 17:    Ejemplo de GSON
  * @author          Ramírez Galindo Karina
+ * Compilación:     Para compilar el programa EjemploGSON.java se debe ejecutar el siguiente comando:
+ *                  javac -cp gson-2.8.6.jar EjemploGSON.java
  * Ejecución:       Para ejecutar el programa en Windows:
  *                  java -cp gson-2.8.6.jar;. EjemploGSON
  *                  Para ejecutar el programa en Linux:
@@ -18,21 +20,29 @@ class EjemploGSON
     int edad;    
     float sueldo;
     Timestamp fecha_ingreso;
-    Empleado(String nombre,int edad,float sueldo,Timestamp fecha_ingreso)
+    Empleado jefe;
+    Empleado(String nombre,int edad,float sueldo,Timestamp fecha_ingreso,Empleado jefe)
     {
       this.nombre = nombre;
       this.edad = edad;
       this.sueldo = sueldo;
       this.fecha_ingreso = fecha_ingreso;
+      this.jefe = jefe != null ? jefe : this;
     }
   }
 
   public static void main(String[] args)
   {
+    //Creación de 3 empleados de manera que Hugo sea jefe de si mismo, Hugo sea jefe de Paco, y Paco sea jefe de Luis
     Empleado[] e = new Empleado[3];
-    e[0] = new Empleado("Hugo",20,1000,Timestamp.valueOf("2020-01-01 20:10:00"));
-    e[1] = new Empleado("Paco",21,2000,Timestamp.valueOf("2019-10-01 10:15:00"));
-    e[2] = new Empleado("Luis",22,3000,Timestamp.valueOf("2018-11-01 00:00:00"));
+    e[0] = new Empleado("Hugo",20,1000,Timestamp.valueOf("2020-01-01 20:10:00"),null);
+    e[1] = new Empleado("Paco",21,2000,Timestamp.valueOf("2019-10-01 10:15:00"),e[0]);
+    e[2] = new Empleado("Luis",22,3000,Timestamp.valueOf("2018-11-01 00:00:00"),e[1]);
+
+    //Desplegar los datos de cada empleado
+    for (int i = 0; i < e.length; i++)
+      System.out.println(e[i].nombre + " " + e[i].edad + " " + e[i].sueldo + " " + e[i].fecha_ingreso + " jefe:" + e[i].jefe.nombre);
+    
 
     Gson j = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").create();
 
@@ -40,8 +50,9 @@ class EjemploGSON
     System.out.println(s);
 
     Empleado[] v = (Empleado[])j.fromJson(s,Empleado[].class);
-
+    
+    //Cambio el despliegue del arreglo deserializado
     for (int i = 0; i < v.length; i++)
-      System.out.println(v[i].nombre + " " + v[i].edad + " " + v[i].sueldo + " " + v[i].fecha_ingreso);
+      System.out.println(v[i].nombre + " " + v[i].edad + " " + v[i].sueldo + " " + v[i].fecha_ingreso + " jefe:" + (v[i].jefe != null ? v[i].jefe.nombre : null));
   }
 }
