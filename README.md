@@ -24,6 +24,7 @@
 📓Actividad 12. Cominicación en Grupo Confiable |
 📓Actividad 15. RMI | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/15.RMI) |
 📓Actividad 16. Matrices RMI | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/16.MatricesRMI) |
+📓Actividad 17. JSON | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/17.JSON) |
 
 ## Lista de tareas
 |Nombre |Calificación|Archivos|
