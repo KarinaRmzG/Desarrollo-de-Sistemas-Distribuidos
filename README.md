@@ -14,7 +14,7 @@
 📓Actividad 4. Cliente - Servidor SSL | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/4.Cliente-ServidorSSL) |
 📓Actividad 5. Multicast | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/5.Multicast) |
 📓Actividad 6. Jerarquia de Memoria | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/6.JerarquiaDeMemoria) |
-📓Actividad 7. Máquinas Virtuales en Azure |
+📓Actividad 7. Máquinas Virtuales en Azure | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/7.Creaci%C3%B3nVM-Ubuntu) |
 📓Actividad 8. Transferencia de Archivos |
 📓Actividad 9. Máquina Virtual con imagen Ubuntu |
 📓Actividad 10. Máquina Virtual con imagen Windows |
