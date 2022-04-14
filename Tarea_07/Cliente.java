@@ -149,7 +149,6 @@ public class Cliente{
             String respuesta;
             Gson j = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").create();
             while ((respuesta = br.readLine()) != null){
-                //Usuario usuario_consultado = (Usuario) j.fromJson(respuesta, Usuario.class);
                 usuario_consultado = (Usuario) j.fromJson(respuesta, Usuario.class);
                 usuario_consultado.Imprimir_datos();
             }
@@ -157,9 +156,7 @@ public class Cliente{
             opc2 = sc.next().charAt(0);
 			sc.nextLine();
             if(opc2 == 's'){
-                //BufferedReader br2 = new BufferedReader(new InputStreamReader(System.in));
                 Scanner sc2 = new Scanner(System.in);
-                //String texto = sc2.nextLine();
                 System.out.println("*******************************");
                 System.out.println("Modifica Usuario");
                 System.out.println("*******************************");
