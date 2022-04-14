@@ -283,15 +283,6 @@ class Usuario{
     String genero;
     byte[] foto;
     
-    /*String getEmail() { return this.email; }
-    String getNombre() { return this.nombre; }
-    String getApellidoPaterno() { return this.apellido_paterno; }
-    String getApellidoMaterno() { return this.apellido_materno; }
-    String getFechaNacimiento() { return this.fecha_nacimiento; }
-    String getTelefono() { return this.telefono; }
-    String getGenero() { return this.genero; }
-    byte[] getFoto() { return this.foto; }*/
-
     void setEmail(String email) { this.email = email; }
     void setNombre(String nombre) { this.nombre = nombre; }
     void setApellidoPaterno(String apellidoPaterno) { this.apellido_paterno = apellidoPaterno; }
