@@ -1,0 +1,54 @@
+body{
+    min-height: 100vh;
+    background: linear-gradient(rgba(5,7,12,0.75), rgba(5,7,12,0.75)),
+    url(../img/portada.jpg) no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+.Inicio h1{
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(214, 224, 224);
+}
+.Inicio{
+    margin-top: 100px;
+}
+.btn-success{
+    background-color: rgb(128, 100, 10);
+    border-color: rgb(128, 100,11);
+}
+.btn-success:hover{
+    background-color: rgb(212, 173, 42);
+    border-color: rgb(128, 100,11);
+}
+#alta_usuario{
+    display:block; 
+    text-align: center; 
+    padding-left: 10%; 
+    padding-right: 10%;
+    color: white;
+}
+#alta_usuario h1{
+    color: white;
+}
+#alta_usuario input{
+    background-color: rgba(5,7,12,0.5);
+}
+
+#alta_usuario textarea{
+    background-color: rgba(5,7,12,0.5);
+}
+#alta_usuario span{
+    background-color: rgba(231, 237, 252, 0.5);
+    color: black;
+}
+#formFile{
+    color: white;
+}
+
