@@ -66,7 +66,7 @@
 					nombre: get("alta_nombre").value,
 					apellido_paterno: get("alta_apellido_paterno").value,
 					apellido_materno: get("alta_apellido_materno").value,
-					fecha_nacimiento: get("alta_fecha_nacimiento").value != "" ? new Date(get("alta_fecha_nacimiento").value).toISOString() : null,
+					fecha_nacimiento: get("alta_fecha_nacimiento").value,
 					telefono: get("alta_telefono").value != "" ? get("alta_telefono").value : null,
 					genero: get("alta_genero").value == "Masculino" ? "M" : get("alta_genero").value == "Femenino" ? "F" : null,
 					foto: foto
@@ -157,7 +157,7 @@
 					nombre: get("consulta_nombre").value,
 					apellido_paterno: get("consulta_apellido_paterno").value,
 					apellido_materno: get("consulta_apellido_materno").value,
-					fecha_nacimiento: get("consulta_fecha_nacimiento").value != "" ? new Date(get("consulta_fecha_nacimiento").value).toISOString() : null,
+					fecha_nacimiento: get("consulta_fecha_nacimiento").value,
 					telefono: get("consulta_telefono").value != "" ? get("consulta_telefono").value : null,
 					genero: get("consulta_genero").value == "Masculino" ? "M" : get("consulta_genero").value == "Femenino" ? "F" : null,
 					foto: foto
