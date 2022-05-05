@@ -36,4 +36,4 @@
 💻Tarea 4. Chat Multicast | 100/100 | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_04) |
 💻Tarea 5. Multiplicación de matrices utilizando objetos distribuidos | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_05) |
 💻Tarea 6. Implementación de un servicio web estilo REST | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_06) |
-💻Tarea 7. Desarrollo de un cliente para un servicio web estilo REST | |[Archivos 📁] |
+💻Tarea 7. Desarrollo de un cliente para un servicio web estilo REST | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_07) |
