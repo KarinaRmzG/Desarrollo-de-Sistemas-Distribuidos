@@ -27,28 +27,33 @@ body{
     background-color: rgb(212, 173, 42);
     border-color: rgb(128, 100,11);
 }
-#alta_usuario{
+#articulo{
     display:block; 
     text-align: center; 
     padding-left: 10%; 
     padding-right: 10%;
     color: white;
 }
-#alta_usuario h1{
+#articulo h1{
     color: white;
 }
-#alta_usuario input{
+#articulo input{
     background-color: rgba(5,7,12,0.5);
+    color: white;
 }
 
-#alta_usuario textarea{
+#articulo textarea{
     background-color: rgba(5,7,12,0.5);
 }
-#alta_usuario span{
+#articulo span{
     background-color: rgba(231, 237, 252, 0.5);
     color: black;
 }
 #formFile{
     color: white;
+}
+#button-addon2{
+    color: white;
+    border-color: white;
 }
 
