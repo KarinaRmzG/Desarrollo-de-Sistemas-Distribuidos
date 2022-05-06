@@ -69,3 +69,6 @@ body{
 .hide, .remove{
     display: none;
 }
+#descripcion{
+    color: white;
+}

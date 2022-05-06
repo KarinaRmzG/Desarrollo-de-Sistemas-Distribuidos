@@ -68,7 +68,7 @@ public class Servicio
     //El estado HTTP 202 indica que la solicitud se ha aceptado para su procesamiento, 
     //pero el procesamiento no se ha completado.
      
-    if (articulo.nombre == null || usuario.nombre.equals(""))
+    if (articulo.nombre == null || articulo.nombre.equals(""))
       return Response.status(202).entity(j.toJson(new Error("Ingrese el nombre del artículo"))).build();
 
     if (articulo.descripcion == null || articulo.descripcion.equals(""))
@@ -93,7 +93,7 @@ public class Servicio
         ResultSet rs = stmt_1.executeQuery();
         try{
           if (rs.next())
-             return Response.status(202).entity(j.toJson(new Error("Artículo existente con la misma descripción"))).build();
+             return Response.status(202).entity(j.toJson("Artículo existente con la misma descripción")).build();
         }
         finally{
           rs.close();
@@ -127,7 +127,9 @@ public class Servicio
           stmt_3.close();
         }
       }
+      conexion.commit();
     }catch (Exception e){
+      conexion.rollback();
       return Response.status(500).entity(j.toJson(new Error(e.getMessage()))).build();
     }
     finally{
@@ -168,9 +170,9 @@ public class Servicio
             busca_articulo.add(a);//Añadimos el objeto "articulo" al ArrayList
           }
           if(busca_articulo.size() > 0){
-            return Response.ok().entity(j.toJson(r)).build();
+            return Response.ok().entity(j.toJson(busca_articulo)).build();
           }else{
-            return Response.status(400).entity(j.toJson(new Error("No hay coincidencias de búsqueda :( "))).build();
+            return Response.status(202).entity(j.toJson("No hay coincidencias de búsqueda :( ")).build();
           }
         }
         finally{
@@ -181,7 +183,7 @@ public class Servicio
         stmt_1.close();
       }
     }catch (Exception e){
-      return Response.status(400).entity(j.toJson(new Error(e.getMessage()))).build();
+      return Response.status(500).entity(j.toJson(new Error(e.getMessage()))).build();
     }
     finally
     {
@@ -196,144 +198,204 @@ public class Servicio
    * @throws Exception
    */
   @POST
-  @Path("alta_carrito")
-  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response modifica(@FormParam("articulo") Articulo articulo) throws Exception{
-    Connection conexion= pool.getConnection();
-    int stock = 0;
-    int id_articulo_carrito;
+    @Path("alta_carrito")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response altaCarrito(@FormParam("descripcion") String descripcion, @FormParam("cantidad") int cantidad) throws Exception {
+        Connection conexion = pool.getConnection();
+        int cantidad_actual = -1;
+        int id_articulo = -1;
+        try {
+            PreparedStatement stmt_1 = conexion
+                    .prepareStatement("select id_articulo, cantidad from articulos where descripcion=?");
+            try {
+                stmt_1.setString(1, descripcion);
+                ResultSet rs = stmt_1.executeQuery();
+                try {
+                    if (rs.next()) {
+                        id_articulo = rs.getInt(1);
+                        cantidad_actual = rs.getInt(2);
+                    } else {
+                        return Response.status(202).entity(j.toJson("El articulo ya no se encuentra en Stock"))
+                                .build();
+                    }
+                } finally {
+                    rs.close();
+                }
+            } finally {
+                stmt_1.close();
+            }
+            if (cantidad <= cantidad_actual) {
 
-    if(articulo.cantidad < 0)
+                conexion.setAutoCommit(false);
+                PreparedStatement stmt_2 = conexion
+                        .prepareStatement("UPDATE articulos SET cantidad=? WHERE id_articulo=?");
+                try {
+                    stmt_2.setInt(1, cantidad_actual - cantidad);
+                    stmt_2.setInt(2, id_articulo);
+                    stmt_2.executeUpdate();
+                } finally {
+                    stmt_2.close();
+                }
+                PreparedStatement stmt_3 = conexion.prepareStatement("insert into carrito_compra VALUES (0,?,?)");
+                try {
+                    stmt_3.setInt(1, id_articulo);
+                    stmt_3.setInt(2, cantidad);
+                    stmt_3.executeUpdate();
+                } finally {
+                    stmt_3.close();
+                }
+                conexion.commit();
 
-    if (usuario.email == null || usuario.email.equals(""))
-      return Response.status(400).entity(j.toJson(new Error("Se debe ingresar el email"))).build();
+            } else {
+                return Response.status(202).entity(j.toJson("Cantidad de piezas disponibles: "+cantidad_actual)).build();
+            }
+        } catch (Exception e) {
+            conexion.rollback();
+            return Response.status(500).entity(j.toJson(new Error(e.getMessage()))).build();
+        } finally {
+            conexion.setAutoCommit(true);
+            conexion.close();
+        }
+        return Response.status(200).entity(j.toJson("ok")).build();
+    }
 
-    if (usuario.nombre == null || usuario.nombre.equals(""))
-      return Response.status(400).entity(j.toJson(new Error("Se debe ingresar el nombre"))).build();
-
-    if (usuario.apellido_paterno == null || usuario.apellido_paterno.equals(""))
-      return Response.status(400).entity(j.toJson(new Error("Se debe ingresar el apellido paterno"))).build();
-
-    if (usuario.fecha_nacimiento == null || usuario.fecha_nacimiento.equals(""))
-      return Response.status(400).entity(j.toJson(new Error("Se debe ingresar la fecha de nacimiento"))).build();
-
-    try
-    {
-      PreparedStatement stmt_1 = conexion.prepareStatement("UPDATE usuarios SET nombre=?,apellido_paterno=?,apellido_materno=?,fecha_nacimiento=?,telefono=?,genero=? WHERE email=?");
-      try
-      {
-        stmt_1.setString(1,usuario.nombre);
-        stmt_1.setString(2,usuario.apellido_paterno);
-        stmt_1.setString(3,usuario.apellido_materno);
-        stmt_1.setString(4,usuario.fecha_nacimiento);
-        stmt_1.setString(5,usuario.telefono);
-        stmt_1.setString(6,usuario.genero);
-        stmt_1.setString(7,usuario.email);
-        stmt_1.executeUpdate();
+    /**
+     * Método para consultar carrito
+     * @return
+     * @throws Exception
+     */
+    @POST
+    @Path("consulta_carrito")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response consultaCarrito() throws Exception{
+      ArrayList <Articulo> articulos_carrito = new ArrayList<Articulo>();
+      Connection conexion= pool.getConnection();
+      try{
+        PreparedStatement stmt_1 = conexion.prepareStatement("SELECT a.id_articulo, a.nombre, a.descripcion, a.precio, b.cantidad, c.foto FROM carrito_compra b LEFT OUTER JOIN articulos a ON a.id_articulo = b.id_articulo LEFT OUTER JOIN foto_articulos c ON b.id_articulo = c.id_articulo");
+        
+        try{
+          ResultSet rs = stmt_1.executeQuery();
+          try{
+            if (rs.next()){
+              Articulo a = new Articulo();
+              a.id_articulo = rs.getInt(1);
+              a.nombre = rs.getString(2);
+              a.descripcion = rs.getString(3);
+              a.precio = rs.getFloat(4);
+              a.cantidad = rs.getInt(5);
+              a.foto = rs.getBytes(6);
+              articulos_carrito.add(a);
+            }
+  
+            if(articulos_carrito.size() > 0){
+              return Response.ok().entity(j.toJson(articulos_carrito)).build();
+            }else{
+              return Response.status(202).entity(j.toJson(new Error("No hay articulos que coincidan :("))).build();
+            }
+          }
+          finally{
+            rs.close();
+          }
+        }
+        finally{
+          stmt_1.close();
+        }
+      }catch (Exception e){
+        return Response.status(500).entity(j.toJson(new Error(e.getMessage()))).build();
       }
-      finally
-      {
-        stmt_1.close();
-      }
-
-      if (usuario.foto != null)
-      {
-        PreparedStatement stmt_2 = conexion.prepareStatement("DELETE FROM fotos_usuarios WHERE id_usuario=(SELECT id_usuario FROM usuarios WHERE email=?)");
-        try
-        {
-          stmt_2.setString(1,usuario.email);
-          stmt_2.executeUpdate();
-        }
-        finally
-        {
-          stmt_2.close();
-        }
-
-        PreparedStatement stmt_3 = conexion.prepareStatement("INSERT INTO fotos_usuarios VALUES (0,?,(SELECT id_usuario FROM usuarios WHERE email=?))");
-        try
-        {
-          stmt_3.setBytes(1,usuario.foto);
-          stmt_3.setString(2,usuario.email);
-          stmt_3.executeUpdate();
-        }
-        finally
-        {
-          stmt_3.close();
-        }
+      finally{
+        conexion.close();
       }
     }
-    catch (Exception e)
-    {
-      return Response.status(400).entity(j.toJson(new Error(e.getMessage()))).build();
-    }
-    finally
-    {
-      conexion.close();
-    }
-    return Response.ok().build();
-  }
 
-  @POST
-  @Path("borra_usuario")
-  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response borra(@FormParam("email") String email) throws Exception
-  {
-    Connection conexion= pool.getConnection();
+    /**
+     * Método para eliminar todo el carrito de compras
+     * @return
+     * @throws Exception
+     */
+    @POST
+    @Path("elimina_carrito")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response eliminaCarrito() throws Exception {
+        Connection conexion = pool.getConnection();
+        ArrayList<Integer> id_a_carrito = new ArrayList<Integer>();
+        ArrayList<Integer> a_carrito = new ArrayList<Integer>();
+        ArrayList<Integer> a_stock = new ArrayList<Integer>();
+        String msj = "";
+        try{
+          PreparedStatement stmt_1 = conexion.prepareStatement("select id_articulo, cantidad from carrito_compra");
+            try{
+                ResultSet rs = stmt_1.executeQuery();
+                try{
+                    while(rs.next()){
+                        id_a_carrito.add(rs.getInt(1));
+                        a_carrito.add(rs.getInt(2));
+                    }
+                }finally{
+                    rs.close();
+                }
+            }finally{
+                stmt_1.close();
+            }
+            for(Integer id_articulo: id_a_carrito){
+                PreparedStatement stmt_2 = conexion
+                    .prepareStatement("select cantidad from articulos where id_articulo=?");
+                try{
+                    stmt_2.setInt(1, id_articulo);
+                    ResultSet rs = stmt_2.executeQuery();
+                    try{
+                        if(rs.next()){
+                            a_stock.add(rs.getInt(1));
+                        }
+                    }finally{
+                        rs.close();
+                    }
+                }finally{
+                    stmt_2.close();
+                }
+            }
 
-    try
-    {
-      PreparedStatement stmt_1 = conexion.prepareStatement("SELECT 1 FROM usuarios WHERE email=?");
-      try
-      {
-        stmt_1.setString(1,email);
+            conexion.setAutoCommit(false);
 
-        ResultSet rs = stmt_1.executeQuery();
-        try
-        {
-          if (!rs.next())
-		return Response.status(400).entity(j.toJson(new Error("El email no existe"))).build();
+            //Eliminar elementos del carrito
+            for(Integer id_articulo: id_a_carrito){
+                PreparedStatement stmt_3 = conexion
+                    .prepareStatement("delete from carrito_compra where id_articulo=?");
+                try{
+                    stmt_3.setInt(1, id_articulo);
+                    stmt_3.executeUpdate();
+                }finally{
+                    stmt_3.close();
+                }
+            }
+            /// ---- end Eliminar elementos del carrito ----
+
+            /// ------ Actualizar elementos del stock ------
+            for(int pos = 0; pos < id_a_carrito.size(); pos++){
+                PreparedStatement stmt_4 = conexion
+                    .prepareStatement("UPDATE articulos SET cantidad=? WHERE id_articulo=?");
+                try{
+                    stmt_4.setInt(1, a_carrito.get(pos) + a_stock.get(pos) );
+                    stmt_4.setInt(2, id_a_carrito.get(pos) );
+                    stmt_4.executeUpdate();
+                }finally{
+                    stmt_4.close();
+                }
+            }
+            /// ---- end Actualizar elementos del stock ----
+
+            conexion.commit(); /// ------ Finaliza Transaccion ------
+
+        } catch (Exception e) {
+            conexion.rollback();
+            return Response.status(500).entity(j.toJson(new Error(e.getMessage()))).build();
+        } finally {
+            conexion.setAutoCommit(true);
+            conexion.close();
         }
-        finally
-        {
-          rs.close();
-        }
-      }
-      finally
-      {
-        stmt_1.close();
-      }
-      PreparedStatement stmt_2 = conexion.prepareStatement("DELETE FROM fotos_usuarios WHERE id_usuario=(SELECT id_usuario FROM usuarios WHERE email=?)");
-      try
-      {
-        stmt_2.setString(1,email);
-	stmt_2.executeUpdate();
-      }
-      finally
-      {
-        stmt_2.close();
-      }
-
-      PreparedStatement stmt_3 = conexion.prepareStatement("DELETE FROM usuarios WHERE email=?");
-      try
-      {
-        stmt_3.setString(1,email);
-	stmt_3.executeUpdate();
-      }
-      finally
-      {
-        stmt_3.close();
-      }
-    }
-    catch (Exception e)
-    {
-      return Response.status(400).entity(j.toJson(new Error(e.getMessage()))).build();
-    }
-    finally
-    {
-      conexion.close();
-    }
-    return Response.ok().build();
-  }
+        return Response.status(200).entity(j.toJson("ok")).build();
+    }//end public Response eliminaCarrito()
 }

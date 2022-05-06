@@ -47,30 +47,30 @@
         <!--NOMBRE DEL PRODUCTO-->
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Nombre</span>
-            <input type="text" class="form-control"  aria-describedby="basic-addon1">
+            <input type="text" class="form-control"  aria-describedby="basic-addon1" required>
         </div>
         <!--DESCRIPCION DEL PRODUCTO-->
         <div class="input-group">
             <span class="input-group-text">Descripción</span>
-            <textarea class="form-control" aria-label="With textarea"></textarea>
+            <textarea id="descripcion" class="form-control" aria-label="With textarea" required></textarea>
         </div>
         <br>
         <!--PRECIO DEL PRODUCTO-->
         <div class="input-group mb-3">
             <span class="input-group-text">$</span>
-            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" required>
             <span class="input-group-text">.00</span>
         </div>
         <!--CANTIDAD EN ALMACEN-->
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Cantidad</span>
-            <input type="number" class="form-control" id="quantity" name="quantity" min="1" max="5">
+            <input type="number" class="form-control" id="quantity" name="quantity" min="1" max="5" required>
         </div>
         
         <!--FOTOGRAFIA DEL PRODUCTO-->
         <div class="mb-3">
             <img id="alta_imagen" width="100px" src="/Cliente/img/anadir-imagen.png"></img><br><br>
-			<input class="form-control" type="file" onchange="readSingleFile(files,get('alta_imagen'))" multiple="false" accept="image/*"/><br>
+			<input class="form-control" type="file" onchange="readSingleFile(files,get('alta_imagen'))" multiple="false" accept="image/*" required/><br>
           </div>
         <!---->
         <div class="mb-3">
