@@ -68,8 +68,8 @@ public class Servicio
     //El estado HTTP 202 indica que la solicitud se ha aceptado para su procesamiento, 
     //pero el procesamiento no se ha completado.
      
-    if (articulo.nombre == null || articulo.nombre.equals(""))
-      return Response.status(202).entity(j.toJson(new Error("Ingrese el nombre del artículo"))).build();
+    /*if (articulo.nombre == null || articulo.nombre.equals(""))
+      return Response.status(202).entity(j.toJson(new Error("Ingrese el nombre del artículo"))).build();*/
 
     if (articulo.descripcion == null || articulo.descripcion.equals(""))
       return Response.status(202).entity(j.toJson(new Error("Ingrese la descripción del artículo"))).build();
@@ -153,7 +153,7 @@ public class Servicio
     Connection conexion= pool.getConnection();
     ArrayList<Articulo> busca_articulo = new ArrayList<Articulo>();
     try{
-      PreparedStatement stmt_1 = conexion.prepareStatement("SELECT a.id_articulo, a.nombre, a.descripcion, a.precio, a.cantidad_almacen, b.foto FROM articulos a LEFT OUTER JOIN foto_articulos b ON a.id_articulo = b.id_articulo WHERE a.descripcion LIKE ?");
+      PreparedStatement stmt_1 = conexion.prepareStatement("SELECT a.id_articulo, a.descripcion, a.precio, a.cantidad_almacen, b.foto FROM articulos a LEFT OUTER JOIN foto_articulos b ON a.id_articulo = b.id_articulo WHERE a.descripcion LIKE ?");
       try{
         stmt_1.setString(1, "%"+descripcion+"%");
             ResultSet rs = stmt_1.executeQuery();
@@ -161,11 +161,10 @@ public class Servicio
           if (rs.next()){
             Articulo a = new Articulo();
             a.id_articulo = rs.getInt(1);
-            a.nombre = rs.getString(2);
-            a.descripcion = rs.getString(3);
-            a.precio = rs.getFloat(4);
-            a.cantidad = rs.getInt(5);
-            a.foto = rs.getBytes(6);
+            a.descripcion = rs.getString(2);
+            a.precio = rs.getFloat(3);
+            a.cantidad = rs.getInt(4);
+            a.foto = rs.getBytes(5);
 
             busca_articulo.add(a);//Añadimos el objeto "articulo" al ArrayList
           }
@@ -273,7 +272,7 @@ public class Servicio
       ArrayList <Articulo> articulos_carrito = new ArrayList<Articulo>();
       Connection conexion= pool.getConnection();
       try{
-        PreparedStatement stmt_1 = conexion.prepareStatement("SELECT a.id_articulo, a.nombre, a.descripcion, a.precio, b.cantidad, c.foto FROM carrito_compra b LEFT OUTER JOIN articulos a ON a.id_articulo = b.id_articulo LEFT OUTER JOIN foto_articulos c ON b.id_articulo = c.id_articulo");
+        PreparedStatement stmt_1 = conexion.prepareStatement("SELECT a.id_articulo, a.descripcion, a.precio, b.cantidad, c.foto FROM carrito_compra b LEFT OUTER JOIN articulos a ON a.id_articulo = b.id_articulo LEFT OUTER JOIN foto_articulos c ON b.id_articulo = c.id_articulo");
         
         try{
           ResultSet rs = stmt_1.executeQuery();
@@ -281,11 +280,10 @@ public class Servicio
             if (rs.next()){
               Articulo a = new Articulo();
               a.id_articulo = rs.getInt(1);
-              a.nombre = rs.getString(2);
-              a.descripcion = rs.getString(3);
-              a.precio = rs.getFloat(4);
-              a.cantidad = rs.getInt(5);
-              a.foto = rs.getBytes(6);
+              a.descripcion = rs.getString(2);
+              a.precio = rs.getFloat(3);
+              a.cantidad = rs.getInt(4);
+              a.foto = rs.getBytes(5);
               articulos_carrito.add(a);
             }
   

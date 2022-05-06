@@ -5,7 +5,6 @@ use carrito;
 CREATE TABLE articulos
 (
 	id_articulo integer auto_increment primary key,
-	nombre varchar(500) not null,
 	descripcion varchar(500) not null,
 	precio float not null,
 	cantidad_almacen integer not null
