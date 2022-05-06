@@ -51,138 +51,136 @@ public class Servicio
 		.registerTypeAdapter(byte[].class,new AdaptadorGsonBase64())
 		.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
 		.create();
-
+  
+  /**
+   * Método Para dar de alta un artículo
+   * @param articulo
+   * @return
+   * @throws Exception
+   */
   @POST
-  @Path("alta_usuario")
+  @Path("alta_articulo")
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response alta(@FormParam("usuario") Usuario usuario) throws Exception
-  {
+  public Response alta(@FormParam("articulo") Articulo articulo) throws Exception{
     Connection conexion = pool.getConnection();
 
-    if (usuario.email == null || usuario.email.equals(""))
-      return Response.status(400).entity(j.toJson(new Error("Se debe ingresar el email"))).build();
+    //El estado HTTP 202 indica que la solicitud se ha aceptado para su procesamiento, 
+    //pero el procesamiento no se ha completado.
+     
+    if (articulo.nombre == null || usuario.nombre.equals(""))
+      return Response.status(202).entity(j.toJson(new Error("Ingrese el nombre del artículo"))).build();
 
-    if (usuario.nombre == null || usuario.nombre.equals(""))
-      return Response.status(400).entity(j.toJson(new Error("Se debe ingresar el nombre"))).build();
+    if (articulo.descripcion == null || articulo.descripcion.equals(""))
+      return Response.status(202).entity(j.toJson(new Error("Ingrese la descripción del artículo"))).build();
 
-    if (usuario.apellido_paterno == null || usuario.apellido_paterno.equals(""))
-      return Response.status(400).entity(j.toJson(new Error("Se debe ingresar el apellido paterno"))).build();
+    if (articulo.precio <= 0.0f)
+      return Response.status(202).entity(j.toJson(new Error("Precio no válido"))).build();
 
-    if (usuario.fecha_nacimiento == null || usuario.fecha_nacimiento.equals(""))
-      return Response.status(400).entity(j.toJson(new Error("Se debe ingresar la fecha de nacimiento"))).build();
+    if (articulo.cantidad <= 0)
+      return Response.status(202).entity(j.toJson(new Error("Cantidad no válida"))).build();
 
-    try
-    {
-      PreparedStatement stmt_1 = conexion.prepareStatement("SELECT id_usuario FROM usuarios WHERE email=?");
-      try
-      {
-        stmt_1.setString(1,usuario.email);
-
+    if (articulo.foto == null)
+      return Response.status(202).entity(j.toJson(new Error("Ingrese fotografía del artículo"))).build();
+    
+    
+    //COMIENZA TRANSACCIÓN
+    try{
+      conexion.setAutoCommit(false);//para mantener la integridad de los datos. Una operación de actualización del sistema puede involucrar múltiples tablas y requerir múltiples sentencias SQL para operar
+      PreparedStatement stmt_1 = conexion.prepareStatement("SELECT id_articulo FROM articulos WHERE description=?");
+      try{
+        stmt_1.setString(1,articulo.descripcion);
         ResultSet rs = stmt_1.executeQuery();
-        try
-        {
+        try{
           if (rs.next())
-             return Response.status(400).entity(j.toJson(new Error("El email ya existe"))).build();
+             return Response.status(202).entity(j.toJson(new Error("Artículo existente con la misma descripción"))).build();
         }
-        finally
-        {
+        finally{
           rs.close();
         }
       }
-      finally
-      {
+      finally{
         stmt_1.close();
       }
 
-      PreparedStatement stmt_2 = conexion.prepareStatement("INSERT INTO usuarios VALUES (0,?,?,?,?,?,?,?)");
-      try
-      {
-        stmt_2.setString(1,usuario.email);
-        stmt_2.setString(2,usuario.nombre);
-        stmt_2.setString(3,usuario.apellido_paterno);
-        stmt_2.setString(4,usuario.apellido_materno);
-        stmt_2.setString(5,usuario.fecha_nacimiento);
-        stmt_2.setString(6,usuario.telefono);
-        stmt_2.setString(7,usuario.genero);
+      PreparedStatement stmt_2 = conexion.prepareStatement("INSERT INTO articulos VALUES (0,?,?,?,?)");
+      try{
+        stmt_2.setString(1,articulo.descripcion);
+        stmt_2.setFloat(2,articulo.precio);
+        stmt_2.setInt(3,articulo.cantidad);
+        stmt_2.setBytes(4,articulo.foto);
         stmt_2.executeUpdate();
       }
-      finally
-      {
+      finally{
         stmt_2.close();
       }
 
-      if (usuario.foto != null)
-      {
-        PreparedStatement stmt_3 = conexion.prepareStatement("INSERT INTO fotos_usuarios VALUES (0,?,(SELECT id_usuario FROM usuarios WHERE email=?))");
-        try
-        {
-          stmt_3.setBytes(1,usuario.foto);
-          stmt_3.setString(2,usuario.email);
+      //ALTA IMAGEN
+      if (articulo.foto != null){
+        PreparedStatement stmt_3 = conexion.prepareStatement("INSERT INTO foto_ARTICULO VALUES (0,?,(SELECT id_articulo FROM articulos WHERE descripcion=?))");
+        try{
+          stmt_3.setBytes(1,articulo.foto);
+          stmt_3.setString(2,articulo.descripcion);
           stmt_3.executeUpdate();
         }
-        finally
-        {
+        finally{
           stmt_3.close();
         }
       }
+    }catch (Exception e){
+      return Response.status(500).entity(j.toJson(new Error(e.getMessage()))).build();
     }
-    catch (Exception e)
-    {
-      return Response.status(400).entity(j.toJson(new Error(e.getMessage()))).build();
-    }
-    finally
-    {
+    finally{
+      conexion.setAutoCommit(true);
       conexion.close();
     }
-    return Response.ok().build();
+    return Response.status(200).entity(j.toJson("ok")).build();
   }
 
+  /**
+   * Método para consultar artículos utilizando la cláusula LIKE
+   * @param email
+   * @return
+   * @throws Exception
+   */
   @POST
-  @Path("consulta_usuario")
+  @Path("consulta_articulo")
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response consulta(@FormParam("email") String email) throws Exception
-  {
+  public Response consulta(@FormParam("descripcion") String descripcion) throws Exception{
     Connection conexion= pool.getConnection();
+    ArrayList<Articulo> busca_articulo = new ArrayList<Articulo>();
+    try{
+      PreparedStatement stmt_1 = conexion.prepareStatement("SELECT a.id_articulo, a.nombre, a.descripcion, a.precio, a.cantidad_almacen, b.foto FROM articulos a LEFT OUTER JOIN foto_articulos b ON a.id_articulo = b.id_articulo WHERE a.descripcion LIKE ?");
+      try{
+        stmt_1.setString(1, "%"+descripcion+"%");
+            ResultSet rs = stmt_1.executeQuery();
+        try{
+          if (rs.next()){
+            Articulo a = new Articulo();
+            a.id_articulo = rs.getInt(1);
+            a.nombre = rs.getString(2);
+            a.descripcion = rs.getString(3);
+            a.precio = rs.getFloat(4);
+            a.cantidad = rs.getInt(5);
+            a.foto = rs.getBytes(6);
 
-    try
-    {
-      PreparedStatement stmt_1 = conexion.prepareStatement("SELECT a.email,a.nombre,a.apellido_paterno,a.apellido_materno,a.fecha_nacimiento,a.telefono,a.genero,b.foto FROM usuarios a LEFT OUTER JOIN fotos_usuarios b ON a.id_usuario=b.id_usuario WHERE email=?");
-      try
-      {
-        stmt_1.setString(1,email);
-
-        ResultSet rs = stmt_1.executeQuery();
-        try
-        {
-          if (rs.next())
-          {
-            Usuario r = new Usuario();
-            r.email = rs.getString(1);
-            r.nombre = rs.getString(2);
-            r.apellido_paterno = rs.getString(3);
-            r.apellido_materno = rs.getString(4);
-            r.fecha_nacimiento = rs.getString(5);
-            r.telefono = rs.getString(6);
-            r.genero = rs.getString(7);
-	    r.foto = rs.getBytes(8);
-            return Response.ok().entity(j.toJson(r)).build();
+            busca_articulo.add(a);//Añadimos el objeto "articulo" al ArrayList
           }
-          return Response.status(400).entity(j.toJson(new Error("El email no existe"))).build();
+          if(busca_articulo.size() > 0){
+            return Response.ok().entity(j.toJson(r)).build();
+          }else{
+            return Response.status(400).entity(j.toJson(new Error("No hay coincidencias de búsqueda :( "))).build();
+          }
         }
-        finally
-        {
+        finally{
           rs.close();
         }
       }
-      finally
-      {
+      finally{
         stmt_1.close();
       }
-    }
-    catch (Exception e)
-    {
+    }catch (Exception e){
       return Response.status(400).entity(j.toJson(new Error(e.getMessage()))).build();
     }
     finally
@@ -191,13 +189,22 @@ public class Servicio
     }
   }
 
+  /**
+   * Método para el carrito de compras
+   * @param usuario
+   * @return
+   * @throws Exception
+   */
   @POST
-  @Path("modifica_usuario")
+  @Path("alta_carrito")
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response modifica(@FormParam("usuario") Usuario usuario) throws Exception
-  {
+  public Response modifica(@FormParam("articulo") Articulo articulo) throws Exception{
     Connection conexion= pool.getConnection();
+    int stock = 0;
+    int id_articulo_carrito;
+
+    if(articulo.cantidad < 0)
 
     if (usuario.email == null || usuario.email.equals(""))
       return Response.status(400).entity(j.toJson(new Error("Se debe ingresar el email"))).build();

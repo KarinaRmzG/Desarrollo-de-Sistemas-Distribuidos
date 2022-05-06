@@ -1,11 +1,11 @@
-var foto = null;  // por default la foto es nula
+let foto = null;  // por default la foto es nula
 function get(id){
 	return document.getElementById(id);
 }
 function readSingleFile(files,imagen){
-	var file = files[0];
+	let file = files[0];
 	if (!file) return;
-	var reader = new FileReader();
+	let reader = new FileReader();
 	reader.onload = function(e){
 		imagen.src = reader.result;
 		// reader.result incluye al principio: "data:image/jpeg;base64,"
