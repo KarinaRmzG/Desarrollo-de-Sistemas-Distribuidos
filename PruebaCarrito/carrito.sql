@@ -26,3 +26,5 @@ CREATE TABLE carrito_compra(
 
 alter table foto_articulo add foreign key (id_articulo) references articulos(id_articulo);
 alter table carrito_compra add foreign key (id_articulo) references articulos(id_articulo);
+
+create unique index articulo_1 on articulos(descripcion);

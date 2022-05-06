@@ -18,3 +18,15 @@ function quita_foto(){
 	get('consulta_imagen').src='usuario_sin_foto.png';
 	get('consulta_file').value='';
 }
+
+function ver_carrito(){
+	oculta(get("div_busqueda"));
+	muestra(get("div_carrito"));
+	//oculta(get("btn_crear_elem"));
+	oculta(get("btn_busqueda"));
+	oculta(get("busqueda_articulo"));
+	muestra(get("btn_volver"));
+	consulta_carrito();
+const busqueda = get("div_busqueda");
+ busqueda.innerHTML = '';
+}
