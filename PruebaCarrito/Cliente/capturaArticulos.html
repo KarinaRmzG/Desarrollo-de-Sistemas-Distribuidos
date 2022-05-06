@@ -68,8 +68,8 @@
         
         <!--FOTOGRAFIA DEL PRODUCTO-->
         <div class="mb-3">
-            <img id="alta_imagen" width="100px" src="/vanilla/img/Album1.jpg"></img><br>
-            <input class="form-control" type="file" id="formFile">
+            <img id="alta_imagen" width="100px" src="/Cliente/img/anadir-imagen.png"></img><br><br>
+			<input class="form-control" type="file" onchange="readSingleFile(files,get('alta_imagen'))" multiple="false" accept="image/*"/><br>
           </div>
         <!---->
     </div>

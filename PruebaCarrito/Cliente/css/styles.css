@@ -5,6 +5,9 @@ body{
     background-size: cover;
     color: white;
 }
+.alert{
+    z-index: 100;
+  }
 .Inicio h1{
     display: block;
     font-size: 2em;
@@ -57,3 +60,12 @@ body{
     border-color: white;
 }
 
+.carrito{
+    min-height: 80vh;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+  }
+.hide, .remove{
+    display: none;
+}
