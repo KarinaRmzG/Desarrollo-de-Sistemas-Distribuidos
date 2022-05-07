@@ -72,3 +72,34 @@ body{
 #descripcion{
     color: white;
 }
+
+/*CARRITO*/
+.card{
+    background-color: rgba(1,1,1,0.8);
+}
+.card h5{
+    color: white;
+}
+#añadir{
+    background-color: rgba(36, 34, 34, 0.973);
+    color: white;
+    border-color: white;
+}
+#añadir:hover{
+    background-color: rgb(212, 173, 42);
+    border-color: rgb(128, 100,11);
+}
+.card img{
+    width: 60%;
+    height:60%;
+    display: block;
+    margin: 1em auto;
+}
+.description{
+    height: 25px;
+    overflow: hidden;
+    transition: height .3s ease-in .3s;
+  }
+.description:hover{
+    height: 80px;
+  }
