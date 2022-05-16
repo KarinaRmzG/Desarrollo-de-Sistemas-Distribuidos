@@ -20,7 +20,7 @@
 📓Actividad 10. Máquina Virtual con imagen Windows |
 📓Actividad 11. Relojes Físicos |
 📓Actividad 12. Exclusión Mutua |
-📓Actividad 13. Coorsinación |
+📓Actividad 13. Coordinación |
 📓Actividad 12. Comunicación en Grupo Confiable |
 📓Actividad 15. RMI | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/15.RMI) |
 📓Actividad 16. Matrices RMI | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/16.MatricesRMI) |
