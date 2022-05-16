@@ -21,11 +21,17 @@
 📓Actividad 11. Relojes Físicos |
 📓Actividad 12. Exclusión Mutua |
 📓Actividad 13. Coorsinación |
-📓Actividad 12. Cominicación en Grupo Confiable |
+📓Actividad 12. Comunicación en Grupo Confiable |
 📓Actividad 15. RMI | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/15.RMI) |
 📓Actividad 16. Matrices RMI | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/16.MatricesRMI) |
 📓Actividad 17. JSON | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/17.JSON) |
 📓Actividad 18. ServicioWeb SOAP | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/18.ServiciosWeb) |
+📓Actividad 19. Servicio web estilo REST utilizando el API de Java JAX-RS sobre el servidor de aplicaciones Tomcat |
+📓Actividad 20. Sistema de archivos distribuidos NFS |
+📓Actividad 21. Replicación de Datos |
+📓Actividad 22. Respaldos incrementales y respaldos continuos |
+📓Actividad 23. Microsoft Azure Backup |
+📓Actividad 24. Balance de carga en la nube |
 
 ## Lista de tareas
 |Nombre |Calificación|Archivos|
