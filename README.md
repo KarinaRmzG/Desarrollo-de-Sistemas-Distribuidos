@@ -26,7 +26,7 @@
 📓Actividad 16. Matrices RMI | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/16.MatricesRMI) |
 📓Actividad 17. JSON | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/17.JSON) |
 📓Actividad 18. ServicioWeb SOAP | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/18.ServiciosWeb) |
-📓Actividad 19. Servicio web estilo REST utilizando el API de Java JAX-RS sobre el servidor de aplicaciones Tomcat |
+📓Actividad 19. Servicio web estilo REST |
 📓Actividad 20. Sistema de archivos distribuidos NFS |
 📓Actividad 21. Replicación de Datos |
 📓Actividad 22. Respaldos incrementales y respaldos continuos |
