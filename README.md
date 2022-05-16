@@ -34,8 +34,8 @@
 💻Tarea 2. Implementación de un token-ring  | 100/100 | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea02) |
 💻Tarea 3. Multiplicación distribuida de matrices utilizando paso de mensajes | 100/100 | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_03) |
 💻Tarea 4. Chat Multicast | 100/100 | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_04) |
-💻Tarea 5. Multiplicación de matrices utilizando objetos distribuidos | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_05) |
-💻Tarea 6. Implementación de un servicio web estilo REST | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_06) |
-💻Tarea 7. Desarrollo de un cliente para un servicio web estilo REST | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_07) |
-💻Tarea 8. Desarrollo de un prototipo de sistema de comercio electrónico utilizando un servicio web estilo REST | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_08) |
+💻Tarea 5. Multiplicación de matrices utilizando objetos distribuidos | 100/100 |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_05) |
+💻Tarea 6. Implementación de un servicio web estilo REST | 100/100 |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_06) |
+💻Tarea 7. Desarrollo de un cliente para un servicio web estilo REST | 90/100 |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_07) |
+💻Tarea 8. Desarrollo de un prototipo de sistema de comercio electrónico utilizando un servicio web estilo REST | 90/100 |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_08) |
 💻Tarea 9. Replicación de un sistema completo en la nube | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_09) |
