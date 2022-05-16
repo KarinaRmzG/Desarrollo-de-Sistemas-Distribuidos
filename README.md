@@ -37,3 +37,5 @@
 💻Tarea 5. Multiplicación de matrices utilizando objetos distribuidos | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_05) |
 💻Tarea 6. Implementación de un servicio web estilo REST | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_06) |
 💻Tarea 7. Desarrollo de un cliente para un servicio web estilo REST | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_07) |
+💻Tarea 8. Desarrollo de un prototipo de sistema de comercio electrónico utilizando un servicio web estilo REST | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_08) |
+💻Tarea 9. Replicación de un sistema completo en la nube | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_09) |
