@@ -29,7 +29,7 @@
 📓Actividad 19. Servicio web estilo REST |
 📓Actividad 20. Sistema de archivos distribuidos NFS |
 📓Actividad 21. Replicación de Datos |
-📓Actividad 22. Respaldos incrementales y respaldos continuos |
+📓Actividad 22. Respaldos incrementales y respaldos continuos | [Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/22.Respaldos) |
 📓Actividad 23. Microsoft Azure Backup |
 📓Actividad 24. Balance de carga en la nube |
 
