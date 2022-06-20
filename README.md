@@ -44,4 +44,7 @@
 💻Tarea 6. Implementación de un servicio web estilo REST | 100/100 |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_06) |
 💻Tarea 7. Desarrollo de un cliente para un servicio web estilo REST | 90/100 |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_07) |
 💻Tarea 8. Desarrollo de un prototipo de sistema de comercio electrónico utilizando un servicio web estilo REST | 90/100 |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_08) |
-💻Tarea 9. Replicación de un sistema completo en la nube | |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_09) |
+💻Tarea 9. Replicación de un sistema completo en la nube | 100/100 |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_09) |
+💻Tarea 10. Respaldo y restauración de una máquina virtual en la nube | 100/100 |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_10) |
+💻Tarea 11. Balance de carga en la nube | 100/100 |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_11) |
+💻Tarea 12. Desarrollo de un prototipo de sistema de comercio electrónico utilizando Serverless | 100/100 |[Archivos 📁](https://github.com/KarinaRmzG/Desarrollo-de-Sistemas-Distribuidos/tree/main/Tarea_12) |
