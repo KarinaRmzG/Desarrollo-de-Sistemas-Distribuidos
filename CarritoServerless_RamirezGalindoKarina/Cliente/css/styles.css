@@ -1,0 +1,105 @@
+body{
+    min-height: 100vh;
+    background: linear-gradient(rgba(5,7,12,0.75), rgba(5,7,12,0.75)),
+    url(../img/portada.jpg) no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+.alert{
+    z-index: 100;
+  }
+.Inicio h1{
+    display: block;
+    font-size: 2em;
+    margin-top: 0.67em;
+    margin-bottom: 0.67em;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(214, 224, 224);
+}
+.Inicio{
+    margin-top: 100px;
+}
+.btn-success{
+    background-color: rgb(128, 100, 10);
+    border-color: rgb(128, 100,11);
+}
+.btn-success:hover{
+    background-color: rgb(212, 173, 42);
+    border-color: rgb(128, 100,11);
+}
+#articulo{
+    display:block; 
+    text-align: center; 
+    padding-left: 10%; 
+    padding-right: 10%;
+    color: white;
+}
+#articulo h1{
+    color: white;
+}
+#articulo input{
+    background-color: rgba(5,7,12,0.5);
+    color: white;
+}
+
+#articulo textarea{
+    background-color: rgba(5,7,12,0.5);
+}
+#articulo span{
+    background-color: rgba(231, 237, 252, 0.5);
+    color: black;
+}
+#formFile{
+    color: white;
+}
+#button-addon2{
+    color: white;
+    border-color: white;
+}
+
+.carrito{
+    min-height: 80vh;
+    max-width: 1000px;
+    margin: 0 auto;
+    width: 100%;
+  }
+.hide, .remove{
+    display: none;
+}
+#descripcion{
+    color: white;
+}
+
+/*CARRITO*/
+.card{
+    background-color: rgba(1,1,1,0.8);
+}
+.card h5{
+    color: white;
+}
+#añadir{
+    background-color: rgba(36, 34, 34, 0.973);
+    color: white;
+    border-color: white;
+}
+#añadir:hover{
+    background-color: rgb(212, 173, 42);
+    border-color: rgb(128, 100,11);
+}
+.card img{
+    width: 60%;
+    height:60%;
+    display: block;
+    margin: 1em auto;
+}
+.description{
+    height: 25px;
+    overflow: hidden;
+    transition: height .3s ease-in .3s;
+  }
+.description:hover{
+    height: 80px;
+  }
